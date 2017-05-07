@@ -1,0 +1,33 @@
+h1{
+  text-align: center;
+}
+body{
+  background-color: #626366;
+}
+.working{
+  background-color: #8ba2e7;
+  height:250px;
+}
+button{
+  border: none;
+  background-color: #6c61bf;
+  margin:2px;
+  padding:20px;
+}
+.letter{
+  background-color: red;
+  width:10px;
+  height:10px;
+  display:inline;
+  padding:20px;
+  font-family: "Courier New", Courier, monospace;
+}
+.word{
+  margin-top: 50px;
+}
+.alphabets{
+  margin-top: 30px;
+}
+#canvas{
+  background-color: white;
+}
