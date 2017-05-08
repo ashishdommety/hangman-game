@@ -120,7 +120,7 @@ function checkWin() {
     three.innerHTML == "L" && four.innerHTML == "L" && five.innerHTML == "O") {
     var arr = [one, two, three, four, five];
     for (var i = 0; i < arr.length; i++) {
-      arr[i].style.backgroundColor = "yellow";
+      arr[i].style.color = "red";
     }
     winText();
   }
@@ -131,7 +131,7 @@ var ctx = canvas.getContext("2d");
 
 function hang1() {
   //hangone--- first line
-  ctx.moveTo(0, 100);
+  ctx.moveTo(100, 100);
   ctx.lineTo(250, 100);
   ctx.stroke();
 }
@@ -184,7 +184,7 @@ function hang8() {
   ctx.stroke();
 
   //writing you lose
-  ctx.font = "50px Arial";
+  ctx.font = "30px Arial";
   ctx.fillText("You Lose", 300, 250);
 }
 
