@@ -32,31 +32,57 @@ function createBlanks() {
 
 createBlanks();
 
+//sound effects
+var winSound = new Audio();
+winSound.src = "assets/sounds/winSound.mp3";
+
+var loseSound = new Audio();
+loseSound.src = "assets/sounds/loseSound.flac";
+
+var rightLetter = new Audio();
+rightLetter.src = "assets/sounds/rightLetterSound.mp3";
+
+var wrongLetter = new Audio();
+wrongLetter.src = "assets/sounds/wrongLetterSound.mp3";
+
+var finalWin = new Audio();
+finalWin.src = "assets/sounds/finalWin.wav";
+
 //HELLO
 function wordIsHello() {
   document.onkeyup = function(press) {
     // debugger;
     if (press.key === words[wordNo].charAt(0)) {
       var pos = words[wordNo].indexOf("h");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       checkHello();
     } else if (press.key === words[wordNo].charAt(1)) {
       var pos = words[wordNo].indexOf("e");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       checkHello();
     } else if (press.key === words[wordNo].charAt(2)) {
       var pos = words[wordNo].indexOf("l");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       document.getElementsByClassName("letter")[pos + 1].innerHTML = press.key;
     } else if (press.key === words[wordNo].charAt(4)) {
       var pos = words[wordNo].indexOf("o");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       checkHello();
     } else {
+      wrongLetter.currentTime = 0;
+      wrongLetter.play();
       var p = document.createElement("p");
       p.innerHTML = press.key;
       p.className = "wrong";
@@ -72,33 +98,45 @@ function wordIsGreetings() {
   document.onkeyup = function(press) {
     if (press.key === words[wordNo].charAt(0)) {
       var pos = words[wordNo].indexOf("g");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       document.getElementsByClassName("letter")[pos + 7].innerHTML = press.key;
       checkGreetings();
     } else if (press.key === words[wordNo].charAt(1)) {
       var pos = words[wordNo].indexOf("r");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       checkGreetings();
     } else if (press.key === words[wordNo].charAt(2)) {
       var pos = words[wordNo].indexOf("e");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       document.getElementsByClassName("letter")[pos + 1].innerHTML = press.key;
       checkGreetings();
     } else if (press.key === words[wordNo].charAt(4)) {
       var pos = words[wordNo].indexOf("t");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       checkGreetings();
     } else if (press.key === words[wordNo].charAt(5)) {
       var pos = words[wordNo].indexOf("i");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       checkGreetings();
     } else if (press.key === words[wordNo].charAt(6)) {
       var pos = words[wordNo].indexOf("n");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       checkGreetings();
@@ -108,6 +146,8 @@ function wordIsGreetings() {
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       checkGreetings();
     } else {
+      wrongLetter.currentTime = 0;
+      wrongLetter.play();
       var p = document.createElement("p");
       p.innerHTML = press.key;
       p.className = "wrong";
@@ -123,12 +163,16 @@ function wordIsNamaste(){
   document.onkeyup = function(press){
     if (press.key === words[wordNo].charAt(0)) {
       var pos = words[wordNo].indexOf("n");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       checkNamaste();
     }
     else if (press.key === words[wordNo].charAt(1)) {
       var pos = words[wordNo].indexOf("a");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       document.getElementsByClassName("letter")[pos+2].innerHTML = press.key;
@@ -136,6 +180,8 @@ function wordIsNamaste(){
     }
     else if (press.key === words[wordNo].charAt(2)) {
       var pos = words[wordNo].indexOf("m");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       checkNamaste();
@@ -148,17 +194,23 @@ function wordIsNamaste(){
     }
     else if (press.key === words[wordNo].charAt(5)) {
       var pos = words[wordNo].indexOf("t");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       checkNamaste();
     }
     else if (press.key === words[wordNo].charAt(6)) {
       var pos = words[wordNo].indexOf("e");
+      rightLetter.currentTime = 0;
+      rightLetter.play();
       // console.log(pos);
       document.getElementsByClassName("letter")[pos].innerHTML = press.key;
       checkNamaste();
     }
     else{
+      wrongLetter.currentTime = 0;
+      wrongLetter.play();
       var p = document.createElement("p");
       p.innerHTML = press.key;
       p.className = "wrong";
@@ -169,23 +221,27 @@ function wordIsNamaste(){
   }
 }
 
+//this is the starting
+if (level == 1) {
+  wordIsHello();
+}
+
 //check level
 function checkLevel() {
   if (level == 2) {
+    winSound.currentTime = 0;
+    winSound.play();
     guess.innerHTML = 8;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     wordIsGreetings();
   }
   if (level == 3) {
+    winSound.currentTime = 0;
+    winSound.play();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     wordIsNamaste();
   }
 }
-
-if (level == 1) {
-  wordIsHello();
-}
-
 
 function checkHello() {
   if (document.getElementsByClassName("letter")[0].innerHTML == "h" &&
@@ -236,6 +292,10 @@ function checkNamaste(){
     document.getElementsByClassName("letter")[5].innerHTML == "t" &&
     document.getElementsByClassName("letter")[6].innerHTML == "e"
   ) {
+    // winSound.currentTime = 0;
+    // winSound.play();
+    finalWin.currentTime = 0;
+    finalWin.play();
     levelInfo.innerHTML = "Congratulations! You won!";
     // checkLevel();
     wordNo++;
@@ -284,6 +344,8 @@ function checkLose() {
     guess.innerHTML = 8 - counter;
     hang8();
     guess.style.color = "red";
+    loseSound.currentTime = 0;
+    loseSound.play();
   }
 }
 
