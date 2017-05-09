@@ -15,6 +15,9 @@ body{
   background-size: cover;
   height:250px;
   text-align: center;
+  font-family: 'Love Ya Like A Sister', cursive;
+  font-weight: 400;
+  font-weight: bold;
 }
 button{
   border: none;
@@ -27,9 +30,10 @@ button{
   width:10px;
   height:10px;
   display:inline;
-  padding:20px;
+  padding:10px;
   font-family: "Courier New", Courier, monospace;
-  font-size: 50px;
+  font-size: 30px;
+  font-weight: bold;
 }
 .word{
   margin-top: 50px;
@@ -41,4 +45,43 @@ button{
   /*background-color: white;*/
   background-image: url("../images/paper2.jpg");
   background-size: cover;
+}
+.numbers{
+  float:left;
+  text-align: left;
+  margin-left: 100px;
+  margin-top: 10px;
+  font-size: 20px;
+}
+#level{
+  display:inline;
+}
+#guess{
+  display:inline;
+}
+.number{
+  background-image: url("../images/paper3.png");
+  background-size: cover;
+  height:250px;
+  text-align: left;
+  position: relative;
+  top:50px;
+  width:100%;
+}
+.guesses{
+  margin-left: 20px;
+  position: relative;
+  top: 30px;
+}
+h1{
+font-family: 'Amatic SC', cursive;
+font-size: 80px;
+}
+.wrong{
+    margin-left: 51px;
+    display: inline;
+    position: relative;
+    top:80px;
+    font-size: 20px;
+     transform: rotate(25deg);
 }

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>Hangman Game</title>
   <link rel="stylesheet" href="assets/css/reset.css">
-  <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Love+Ya+Like+A+Sister" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Love+Ya+Like+A+Sister" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -18,45 +18,15 @@
     <div class="row">
       <div class="col-md-6 working">
         <h3>Press any key to start</h3>
-        <div class="word">
-          <div class="letter" id="letter1">_</div>
-          <div class="letter" id="letter2">_</div>
-          <div class="letter" id="letter3">_</div>
-          <div class="letter" id="letter4">_</div>
-          <div class="letter" id="letter5">_</div>
+        <div class="word" id="blanks">
+
         </div>
-        <!-- <div class="alphabets">
-          <div class="firstRow">
-            <button id="a" type="button" name="button">A</button>
-            <button id="b" type="button" name="button">B</button>
-            <button id="c" type="button" name="button">C</button>
-            <button id="d" type="button" name="button">D</button>
-            <button id="e" type="button" name="button">E</button>
-            <button id="f" type="button" name="button">F</button>
-            <button type="button" name="button">G</button>
-            <button type="button" name="button">H</button>
-            <button type="button" name="button">I</button>
-            <button type="button" name="button">J</button>
-            <button type="button" name="button">K</button>
-            <button type="button" name="button">L</button>
-            <button type="button" name="button">M</button>
-          </div>
-          <div class="secondRow">
-            <button type="button" name="button">N</button>
-            <button type="button" name="button">O</button>
-            <button type="button" name="button">P</button>
-            <button type="button" name="button">Q</button>
-            <button type="button" name="button">R</button>
-            <button type="button" name="button">S</button>
-            <button type="button" name="button">T</button>
-            <button type="button" name="button">U</button>
-            <button type="button" name="button">V</button>
-            <button type="button" name="button">W</button>
-            <button type="button" name="button">X</button>
-            <button type="button" name="button">Y</button>
-            <button type="button" name="button">Z</button>
-          </div>
-        </div> -->
+        <h4>Level: <p id="level">1</p></h4>
+        <h4 class="guesses">Guesses Remaining: <p id="guess">8</p></h4>
+        <div class="number" id="wrongLetters">
+
+
+        </div>
       </div>
       <div class="col-md-6 hangman">
         <!-- <img src="assets/images/placeholder.gif" alt=""> -->
