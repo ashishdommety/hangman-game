@@ -12,10 +12,10 @@ function initGlobals() {
   //setting the level to one
   level = 1;
 
-  //game words (note:logic only works with words that don't have repeating letters)
+  //game words
   words = ["pencil", "chalkboard", "trigonometry"];
 
-  // to run through each of the words in the list one by one. Each level the word no goes up by one
+  // to run through each of the words in the list one by one. Each level the word number goes up by one
   wordNo = 0;
 
   //counter for each time a letter is wrongly guessed
@@ -23,6 +23,9 @@ function initGlobals() {
 
   //empty array used later to compare letters entered and winning letters
   letters = [];
+
+  //empty array for wrong letters
+  wrongLetterArr = [];
 
   //canvas element for stick figure
   canvas = document.getElementById("canvas");
@@ -34,6 +37,7 @@ function initGlobals() {
 function createBlanks() {
   wrongLetters.innerHTML = "";
   blank.innerHTML = "";
+  wrongLetterArr = [];
   //reseting the counter to zero
   counter = 0;
   for (var i = 0; i < words[wordNo].length; i++) {
@@ -53,14 +57,17 @@ function setSounds() {
   loseSound = new Audio();
   loseSound.src = "assets/sounds/loseSound.flac";
 
-  rightLetter = new Audio();
-  rightLetter.src = "assets/sounds/rightLetterSound.mp3";
+  rightLetterSound = new Audio();
+  rightLetterSound.src = "assets/sounds/rightLetterSound.mp3";
 
-  wrongLetter = new Audio();
-  wrongLetter.src = "assets/sounds/wrongLetterSound.mp3";
+  wrongLetterSound = new Audio();
+  wrongLetterSound.src = "assets/sounds/wrongLetterSound.mp3";
 
-  finalWin = new Audio();
-  finalWin.src = "assets/sounds/finalWin.wav";
+  finalWinSound = new Audio();
+  finalWinSound.src = "assets/sounds/finalWin.wav";
+
+  errorSound = new Audio();
+  errorSound.src = "assets/sounds/errorSound.wav";
 }
 
 function fillBlanks(keyPressed, word){
@@ -83,36 +90,42 @@ function gameBegin() {
       //write a function that takes real word, finds instances recursively and assigns to correct position in value.
       var wordCopy = words[wordNo];
       fillBlanks(press.key, wordCopy);
-      rightLetter.currentTime = 0;
-      rightLetter.play();
+      rightLetterSound.currentTime = 0;
+      rightLetterSound.play();
       console.log(letters);
       checkWin();
     }
     else {
-      var badArr = [];
-
-      var p = document.createElement("p");
-      p.innerHTML = press.key;
-      p.className = "wrong";
-      wrongLetters.appendChild(p);
-      wrongLetter.currentTime = 0;
-      wrongLetter.play();
-      counter++;
-      checkLose();
+      if(wrongLetterArr.includes(press.key)){
+        console.log("you've already entered that letter!");
+        errorSound.currentTime = 0;
+        errorSound.play();
+      }
+      else{
+        wrongLetterArr.push(press.key);
+        var p = document.createElement("p");
+        p.innerHTML = press.key;
+        p.className = "wrong";
+        wrongLetters.appendChild(p);
+        wrongLetterSound.currentTime = 0;
+        wrongLetterSound.play();
+        counter++;
+        checkLose();
+      }
     }
   }
 }
 
 //check level, with the highest level being 3
 function checkLevel() {
-  if (level < 4) {
+  if (level < words.length) {
     winSound.currentTime = 0;
     winSound.play();
     guess.innerHTML = 8;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     gameBegin();
   } else {
-    console.log("you've reached level 4");
+    console.log("you've reached the final level!");
     finalWin.currentTime = 0;
     finalWin.play();
     //celebration text on canvas
