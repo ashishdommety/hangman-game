@@ -9,6 +9,9 @@ function initGlobals() {
   //getting space for wrong letters entered
   wrongLetters = document.getElementById('wrongLetters');
 
+  //getting the picture for the stick figure
+  var pic = document.getElementById('pic');
+
   //setting the level to one
   level = 1;
 
@@ -26,10 +29,6 @@ function initGlobals() {
 
   //empty array for wrong letters
   wrongLetterArr = [];
-
-  //canvas element for stick figure
-  canvas = document.getElementById("canvas");
-  ctx = canvas.getContext("2d");
 }
 
 
@@ -118,20 +117,21 @@ function gameBegin() {
 
 //check level, with the highest level being 3
 function checkLevel() {
-  if (level < words.length) {
+  if (level <= words.length) {
     winSound.currentTime = 0;
     winSound.play();
     guess.innerHTML = 8;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pic.src = 'assets/images/hangManImg/hang0.png';
     gameBegin();
   } else {
     console.log("you've reached the final level!");
-    finalWin.currentTime = 0;
-    finalWin.play();
-    //celebration text on canvas
-    ctx.font = "50px Arial";
-    ctx.fillText("Hooray!!", 200, 250);
-    levelInfo.innerHTML = "You Won!";
+    finalWinSound.currentTime = 0;
+    finalWinSound.play();
+    //celebration text
+    levelInfo.innerHTML = "Congratulations! You've won!";
+    levelInfo.style.color = 'green';
+    //changing the final win picture
+    pic.src = 'assets/images/hangManImg/hangWin.png';
   }
 }
 
@@ -143,7 +143,7 @@ function checkWin() {
     level++;
     levelInfo.innerHTML = level;
     wordNo++;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pic.src = 'assets/images/hangManImg/hang0.png';
     checkLevel();
     createBlanks();
     counter = 0;
@@ -157,57 +157,44 @@ function checkLose() {
   guess.innerHTML = 8 - counter;
   if (counter == 1) {
     //draw stick one
-    ctx.moveTo(100, 100);
-    ctx.lineTo(250, 100);
-    ctx.stroke();
+    pic.src = 'assets/images/hangManImg/hang1.png';
   }
   else if (counter == 2) {
     //draw noose
-    ctx.lineTo(250, 150);
-    ctx.stroke();
+    pic.src = 'assets/images/hangManImg/hang2.png';
   }
   else if (counter == 3) {
     //draw head
-    ctx.beginPath();
-    ctx.arc(250, 180, 30, 0, 2 * Math.PI);
-    ctx.stroke();
+    pic.src = 'assets/images/hangManImg/hang3.png';
   }
   else if (counter == 4) {
     //draw body
-    ctx.moveTo(250, 210);
-    ctx.lineTo(250, 300);
-    ctx.stroke();
+    pic.src = 'assets/images/hangManImg/hang4.png';
   }
   else if (counter == 5) {
     //draw right leg
-    ctx.lineTo(300, 350);
-    ctx.stroke();
+    pic.src = 'assets/images/hangManImg/hang5.png';
   }
   else if (counter == 6) {
     //draw left leg
-    ctx.moveTo(250, 300);
-    ctx.lineTo(200, 350);
-    ctx.stroke();
+    pic.src = 'assets/images/hangManImg/hang6.png';
   }
   else if (counter == 7) {
     //draw right arm
-    ctx.moveTo(250, 225);
-    ctx.lineTo(300, 270);
-    ctx.stroke();
+    pic.src = 'assets/images/hangManImg/hang7.png';
   }
   else if (counter == 8) {
     //draw left arm
-    ctx.moveTo(250, 225);
-    ctx.lineTo(200, 270);
-    ctx.stroke();
-    //writing you lose
-    ctx.font = "30px Arial";
-    ctx.fillText("You Lose", 300, 250);
-    levelInfo.innerHTML = "Don't give up! Hit the refresh button to try again!";
+    pic.src = 'assets/images/hangManImg/hang8.png';
     //changing other effects on html page
     guess.style.color = "red";
+    //sound
     loseSound.currentTime = 0;
     loseSound.play();
+    //level change
+    levelInfo.innerHTML = 'You Lose.. Hit the refresh button to try again';
+    levelInfo.style.color = 'red';
+    blank.innerHTML = "";
   }
 }
 // intialize the game

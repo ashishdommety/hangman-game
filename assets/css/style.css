@@ -6,8 +6,6 @@ body{
   /*background-color: #626366;*/
   background-image: url("../images/bg2.jpg");
   background-size: cover;
-
-
 }
 .working{
   /*background-color: #8ba2e7;*/
@@ -40,11 +38,6 @@ button{
 }
 .alphabets{
   margin-top: 30px;
-}
-#canvas{
-  /*background-color: white;*/
-  background-image: url("../images/paper2.jpg");
-  background-size: cover;
 }
 .numbers{
   float:left;
