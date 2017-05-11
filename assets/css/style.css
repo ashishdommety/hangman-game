@@ -13,7 +13,7 @@ body{
   /*background-color: #8ba2e7;*/
   background-image: url("../images/punchedpaper.png");
   background-size: cover;
-  height:250px;
+  overflow-y: hidden;
   text-align: center;
   font-family: 'Love Ya Like A Sister', cursive;
   font-weight: 400;
@@ -60,8 +60,8 @@ button{
   display:inline;
 }
 .number{
-  background-image: url("../images/paper3.png");
-  background-size: cover;
+  /*background-image: url("../images/paper3.png");
+  background-size: cover;*/
   height:250px;
   text-align: left;
   position: relative;
@@ -71,7 +71,13 @@ button{
 .guesses{
   margin-left: 20px;
   position: relative;
-  top: 30px;
+  top: 20px;
+}
+.headP{
+  font-family: 'Love Ya Like A Sister', cursive;
+  margin-top: 40px;
+  font-size: 20px;
+  color:white;
 }
 h1{
 font-family: 'Amatic SC', cursive;
@@ -83,5 +89,17 @@ font-size: 80px;
     position: relative;
     top:80px;
     font-size: 20px;
-     transform: rotate(25deg);
+}
+#wrongTitle{
+  position: relative;
+  left:-150px;
+  top:100px;
+  font-size: 16px;
+}
+#footer{
+  color: white;
+  font-family: 'Amatic SC', cursive;
+  font-size: 30px;
+  text-align: right;
+  font-weight: bold;
 }

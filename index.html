@@ -13,16 +13,23 @@
 <body>
   <div class="container">
     <div class="row">
-      <h1>The Hangman Game!</h1>
+      <h1 class='col-md-6'>The Hangman Game!</h1>
+      <div class="col-md-6">
+        <p class="headP">Friendly reminder: Make sure your caps lock is off.<br>
+          Also, you can press a key only once.</p>
+      </div>
     </div>
     <div class="row">
       <div class="col-md-6 working">
         <h3>Press any key to start</h3>
+        <h4>The theme is 'school'</h4>
+        <!-- <p>Heads up! Don't enter the same letter twice!</p> -->
         <div class="word" id="blanks">
 
         </div>
         <h4>Level: <p id="level">1</p></h4>
         <h4 class="guesses">Guesses Remaining: <p id="guess">8</p></h4>
+          <p id="wrongTitle">Wrong Guesses</p>
         <div class="number" id="wrongLetters">
 
 
@@ -33,7 +40,11 @@
         <canvas id="canvas" width="550" height="400"></canvas>
       </div>
     </div>
+    <div class="row">
+      <p id="footer">By Ashish Dommety</p>
+    </div>
   </div>
+
   <script src="assets/javascript/game.js" charset="utf-8"></script>
 </body>
 
