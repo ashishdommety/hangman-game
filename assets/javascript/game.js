@@ -1,30 +1,41 @@
-//getting the level text
-var levelInfo = document.getElementById("level");
-//getting the div that contains the blanks in order to append values
-var blank = document.getElementById("blanks");
-//getting the guesses remaining
-var guess = document.getElementById('guess');
-//getting space for wrong letters entered
-var wrongLetters = document.getElementById('wrongLetters');
+//removed the keyword 'var' so that i could declare a global variable inside the function
+function initGlobals() {
+  //getting the level text
+  levelInfo = document.getElementById("level");
+  //getting the div that contains the blanks in order to append values
+  blank = document.getElementById("blanks");
+  //getting the guesses remaining
+  guess = document.getElementById('guess');
+  //getting space for wrong letters entered
+  wrongLetters = document.getElementById('wrongLetters');
 
-//setting the level to one
-level = 1;
+  //setting the level to one
+  level = 1;
 
-//game words (note:logic only works with words that don't have repeating letters)
-var words = ["study", "pencil", "history"];
+  //game words (note:logic only works with words that don't have repeating letters)
+  words = ["hello", "pencil", "history"];
 
-// to run through each of the words in the list one by one. Each level the word no goes up by one
-var wordNo = 0;
+  // to run through each of the words in the list one by one. Each level the word no goes up by one
+  wordNo = 0;
 
-//counter for each time a letter is wrongly guessed
-var counter = 0;
+  //counter for each time a letter is wrongly guessed
+  counter = 0;
+
+  //empty array used later to compare letters entered and winning letters
+  letters = [];
+
+  //canvas element for stick figure
+  canvas = document.getElementById("canvas");
+  ctx = canvas.getContext("2d");
+}
+
 
 //creates blanks for any word in the array
 function createBlanks() {
   wrongLetters.innerHTML = "";
   blank.innerHTML = "";
   //reseting the counter to zero
-  var counter = 0;
+  counter = 0;
   for (var i = 0; i < words[wordNo].length; i++) {
     var div = document.createElement("div");
     div.innerHTML = "_";
@@ -32,39 +43,54 @@ function createBlanks() {
     blank.appendChild(div);
   }
 }
-createBlanks();
 
-//sound effects
-var winSound = new Audio();
-winSound.src = "assets/sounds/winSound.mp3";
 
-var loseSound = new Audio();
-loseSound.src = "assets/sounds/loseSound.flac";
+function setSounds() {
+  //sound effects
+  winSound = new Audio();
+  winSound.src = "assets/sounds/winSound.mp3";
 
-var rightLetter = new Audio();
-rightLetter.src = "assets/sounds/rightLetterSound.mp3";
+  loseSound = new Audio();
+  loseSound.src = "assets/sounds/loseSound.flac";
 
-var wrongLetter = new Audio();
-wrongLetter.src = "assets/sounds/wrongLetterSound.mp3";
+  rightLetter = new Audio();
+  rightLetter.src = "assets/sounds/rightLetterSound.mp3";
 
-var finalWin = new Audio();
-finalWin.src = "assets/sounds/finalWin.wav";
+  wrongLetter = new Audio();
+  wrongLetter.src = "assets/sounds/wrongLetterSound.mp3";
 
-//empty array used later to compare letters entered and winning letters
-var letters = [];
+  finalWin = new Audio();
+  finalWin.src = "assets/sounds/finalWin.wav";
+}
+
+function fillBlanks(keyPressed, word){
+  var pos = word.indexOf(keyPressed);
+  if(pos >= 0){
+    document.getElementsByClassName('letter')[pos].innerHTML = keyPressed;
+    letters[pos] = keyPressed;
+    var temp = word.replace(keyPressed,'$');
+    //calling recursively to handle multiple letters
+    fillBlanks(keyPressed, temp);
+  }
+  else {
+    return;
+  }
+}
 
 function gameBegin() {
   document.onkeyup = function(press) {
-    var pos = words[wordNo].indexOf(press.key);
-    if (pos >= 0) {
-      document.getElementsByClassName("letter")[pos].innerHTML = press.key;
-      letters.push(press.key);
+    if (words[wordNo].includes(press.key)) {
+      //write a function that takes real word, finds instances recursively and assigns to correct position in value.
+      var wordCopy = words[wordNo];
+      fillBlanks(press.key, wordCopy);
       rightLetter.currentTime = 0;
       rightLetter.play();
       console.log(letters);
       checkWin();
     }
-    if (pos == -1) {
+    else {
+      var badArr = [];
+
       var p = document.createElement("p");
       p.innerHTML = press.key;
       p.className = "wrong";
@@ -75,10 +101,6 @@ function gameBegin() {
       checkLose();
     }
   }
-}
-//this is the starting
-if (level == 1) {
-  gameBegin();
 }
 
 //check level, with the highest level being 3
@@ -103,15 +125,7 @@ function checkLevel() {
 //logic to check for a win
 function checkWin() {
   var jointLetters = letters.join("");
-  var resultArray = [];
-  for (var i = 0; i < words[wordNo].length; i++) {
-    for (var j = 0; j < jointLetters.length; j++) {
-      if (words[wordNo][i] == jointLetters[j]) {
-        resultArray.push(words[wordNo][i]);
-      }
-    }
-  }
-  if (resultArray.join("") == words[wordNo]) {
+  if (jointLetters == words[wordNo]) {
     alert(words[wordNo]);
     level++;
     levelInfo.innerHTML = level;
@@ -125,54 +139,51 @@ function checkWin() {
   }
 }
 
-//canvas element for stick figure
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-
 //logic to check for a lose
 function checkLose() {
+  guess.innerHTML = 8 - counter;
   if (counter == 1) {
-    guess.innerHTML = 8 - counter;
+    //draw stick one
     ctx.moveTo(100, 100);
     ctx.lineTo(250, 100);
     ctx.stroke();
   }
-  if (counter == 2) {
-    guess.innerHTML = 8 - counter;
+  else if (counter == 2) {
+    //draw noose
     ctx.lineTo(250, 150);
     ctx.stroke();
   }
-  if (counter == 3) {
-    guess.innerHTML = 8 - counter;
+  else if (counter == 3) {
+    //draw head
     ctx.beginPath();
     ctx.arc(250, 180, 30, 0, 2 * Math.PI);
     ctx.stroke();
   }
-  if (counter == 4) {
-    guess.innerHTML = 8 - counter;
+  else if (counter == 4) {
+    //draw body
     ctx.moveTo(250, 210);
     ctx.lineTo(250, 300);
     ctx.stroke();
   }
-  if (counter == 5) {
-    guess.innerHTML = 8 - counter;
+  else if (counter == 5) {
+    //draw right leg
     ctx.lineTo(300, 350);
     ctx.stroke();
   }
-  if (counter == 6) {
-    guess.innerHTML = 8 - counter;
+  else if (counter == 6) {
+    //draw left leg
     ctx.moveTo(250, 300);
     ctx.lineTo(200, 350);
     ctx.stroke();
   }
-  if (counter == 7) {
-    guess.innerHTML = 8 - counter;
+  else if (counter == 7) {
+    //draw right arm
     ctx.moveTo(250, 225);
     ctx.lineTo(300, 270);
     ctx.stroke();
   }
-  if (counter == 8) {
-    guess.innerHTML = 8 - counter;
+  else if (counter == 8) {
+    //draw left arm
     ctx.moveTo(250, 225);
     ctx.lineTo(200, 270);
     ctx.stroke();
@@ -186,3 +197,10 @@ function checkLose() {
     loseSound.play();
   }
 }
+// intialize the game
+(function initialize() {
+  initGlobals();
+  createBlanks();
+  setSounds();
+  gameBegin();
+})(); //--- IIFE - Immediately invoked function expression
