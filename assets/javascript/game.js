@@ -13,7 +13,7 @@ function initGlobals() {
   level = 1;
 
   //game words (note:logic only works with words that don't have repeating letters)
-  words = ["hello", "pencil", "history"];
+  words = ["pencil", "chalkboard", "trigonometry"];
 
   // to run through each of the words in the list one by one. Each level the word no goes up by one
   wordNo = 0;
